@@ -1,0 +1,357 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-dark col-md-12 col-lg-12 mb-4" data-toggle="modal" data-target="#reservationModal" id="reservationModalToggle">
+    <br />
+    <h4>Rezervasyon Yap</h4>
+    <br>
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="reservationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Yeni Rezervason Ekle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="reservationForm">
+
+                    <div class="form-group">
+                        <label for="teamNumberSelect">Takım Numarası</label>
+                        <select class="form-control" id="teamNumberSelect" name="teamNumber">
+                            <option>Yükleniyor</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="reservationSlotSelect">Randevu Saati</label>
+                        <select class="form-control" id="reservationSlotSelect" name="reservationSlotId">
+                            <option>Yükleniyor</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="tableSelect">Masa</label>
+                        <select class="form-control" id="tableSelect" name="tableNumber">
+                            <option>Yükleniyor</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="timeoutInput">Yeniden Rezervason İçin Gereken Süre (dk)</label>
+                        <input class="form-control" id="timeoutInput" name="reservationTimeout" type="number" value="30" /> 
+                        
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="abortAddReservation">İptal Et</button>
+                <button type="button" class="btn btn-success" id="addReservationBtn">Rezervasyon Ekle</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="text-center">
+
+
+
+    <!-- Header Card -->
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            @* <h1 class="display-4">Kalan Süre: 8 Dakika 26 Saniye</h1> *@
+            <h1 class="display-4">Süre: <div id="timer">--:--</div></h1>
+
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            @for (int i = 1; i <= 10; i++)
+            {
+                <div class="col-md-6 col-lg-2 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title" id="@("tableTitle" + i)">Masa @i:</h4>
+                            <h2 class="card-title" id="@("teamNumber" + i)">0000</h2>
+                            <p class="card-text" id="@("teamName" + i)">Takım Yok</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    @* <!-- Grid of Cards for 6 Tables -->
+    <div class="container">
+    <div class="row">
+    <div class="col-md-6 col-lg-4 mb-4">
+    <div class="card">
+    <div class="card-body">
+    <h4 class="card-title">Masa 1:</h4>
+    <h2 class="card-title">6429</h2>
+    <p class="card-text">4th Dimension</p>
+    </div>
+    </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4 mb-4">
+    <div class="card">
+    <div class="card-body">
+    <h4 class="card-title">Masa 2:</h4>
+    <h2 class="card-title">254</h2>
+    <p class="card-text">Cheesy Poofs</p>
+    </div>
+    </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4 mb-4">
+    <div class="card">
+    <div class="card-body">
+    <h4 class="card-title">Masa 3:</h4>
+    <h2 class="card-title">3646</h2>
+    <p class="card-text">Integra</p>
+    </div>
+    </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4 mb-4">
+    <div class="card">
+    <div class="card-body">
+    <h4 class="card-title">Masa 4:</h4>
+    <h2 class="card-title">6430</h2>
+    <p class="card-text">ACI 35</p>
+    </div>
+    </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4 mb-4">
+    <div class="card">
+    <div class="card-body">
+    <h4 class="card-title">Masa 5:</h4>
+    <h2 class="card-title">7285</h2>
+    <p class="card-text">Sneaky Snakes</p>
+    </div>
+    </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4 mb-4">
+    <div class="card">
+    <div class="card-body">
+    <h4 class="card-title">Masa 6:</h4>
+    <h2 class="card-title">118</h2>
+    <p class="card-text">Robonauts</p>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div> *@
+
+
+
+
+    <script src="~/lib/easytimer/src/easytimer.js"></script>
+
+
+    <script>
+
+
+
+        $(document).ready(function () {
+            $('#addReservationBtn').click(function (e) {
+                addReservation(e);
+            });
+
+            $('#reservationModalToggle').click(function () {
+                clearModalForm();
+
+                getTeams();
+
+                getReservationSlots();
+
+            });
+
+
+        });
+
+        function clearModalForm() {
+            $('#teamNumberSelect').html('<option>Yükleniyor</option>');
+            $('#reservationSlotSelect').html('<option>Yükleniyor</option>');
+            $('#tableSelect').html('<option>Yükleniyor</option>');
+        }
+
+        function getReservationSlots() {
+            // Get all reservation slots from the server
+            $.ajax({
+                url: '/Reservation/GetReservationSlots',
+                type: 'GET',
+                success: function (data) {
+                    // Fill the options with reservation slots
+                    var slotSelect = $('#reservationSlotSelect');
+                    slotSelect.html('');
+                    slotSelect.append('<option value="">Saat Seç</option>');
+                    $.each(data, function (index, slot) {
+                        var isAvailable = slot.isAvailable
+                        if (isAvailable) {
+                            slotSelect.append('<option value="' + slot.id + '">' + slot.startTime + ' - ' + slot.endTime + '</option>');
+                        }
+                        else {
+                            // Add the option as disabled
+                            slotSelect.append('<option value="' + slot.id + '" class="text-warning" disabled>' + slot.startTime + ' - ' + slot.endTime + '</option>');
+                        }
+                        // slotSelect.append('<option value="' + slot.id + '">' + slot.startTime + ' - ' + slot.endTime + '</option>');
+                    });
+
+                    // Add event listener to the slot select
+                    slotSelect.change(function () {
+                        var selectedSlotId = $(this).val();
+                        getTables(selectedSlotId);
+                    });
+                }
+            });
+        }
+
+        function getTables(reservationSlotId) {
+            $.ajax({
+                url: '/Reservation/GetTables',
+                type: 'GET',
+                data: { reservationSlotId: reservationSlotId },
+                success: function (data) {
+                    var tableSelect = $('#tableSelect');
+                    tableSelect.html('');
+                    tableSelect.append('<option value="">Masa Seç</option>');
+                    $.each(data, function (index, tableNumber) {
+                        tableSelect.append('<option value="' + tableNumber + '">' + tableNumber + '</option>');
+                    });
+                }
+            });
+        }
+
+        function getTeams() {
+            $.ajax({
+                url: '/Admin/GetTeams',
+                type: 'GET',
+                success: function (data) {
+                    var teamSelect = $('#teamNumberSelect');
+                    teamSelect.html('');
+                    teamSelect.append('<option value="">Takım Seç</option>');
+                    $.each(data, function (index, team) {
+                        teamSelect.append('<option value="' + team.teamNumber + '">' + team.teamNumber + ' - ' + team.teamName + '</option>');
+                    });
+                }
+            });
+        }
+
+        function addReservation(e) {
+            e.preventDefault(); // Prevent default form submission
+            var formData = $('#reservationForm').serialize(); // Serialize form data for submission
+
+            $.ajax({
+                type: "POST",
+                url: "/Reservation/AddReservation",
+                data: formData,
+                success: function (response) {
+                    // Check for success status in response, this depends on your server response
+                    if (response.success === true) { // This condition might need adjustment
+                        alert(response.message);
+                        $("#reservationModal .close").click()
+
+                        // Refresh the homepage info
+                        loadHomePageInfo();
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert('Sunucuya bağlanırken bir hata oluştu.');
+                }
+            });
+        }
+
+
+
+
+
+
+
+
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////
+
+        function checkStatus() {
+            // Triggered by timer every ~10 Sec (configurable)
+            // Poll Server for table and team info
+            // if new data != old data
+            // updateCard() in for loop
+            // else
+            // do nothing
+        }
+
+        function updateCard(tableNumber, teamNumber, teamName) {
+            if (teamNumber === 0) {
+                document.getElementById('teamNumber' + tableNumber).innerText = '----';
+            } else {
+                document.getElementById('teamNumber' + tableNumber).innerText = teamNumber;
+
+            }
+            document.getElementById('tableTitle' + tableNumber).innerText = 'Masa ' + tableNumber + ':';
+            document.getElementById('teamName' + tableNumber).innerText = teamName;
+        }
+
+        var timer = new Timer();
+
+        function loadHomePageInfo(){
+
+            timer = new Timer();
+
+            var initialMin = 10;
+            var initialSec = 0;
+
+            // Get remaining time from server and start the on screen timer accordingly
+
+            // ajax request to /Reservation/GetCurrentSlot
+            $.ajax({
+                url: '/Reservation/GetHomePageInfo',
+                type: 'GET',
+                success: function (data) {
+                    initialMin = data.remainingMin;
+                    initialSec = data.remainingSec;
+
+                    timer.start({ countdown: true, precision: 'seconds', startValues: { minutes: initialMin, seconds: initialSec } });
+
+                    // Update all cards with foreach
+                    data.reservations.forEach(function (reservation) {
+                        updateCard(reservation.tableNumber, reservation.teamNumber, reservation.teamName);
+                    });
+
+                }
+            });
+
+
+            //timer.start();
+            timer.addEventListener('secondsUpdated', function (e) {
+                $('#timer').html(timer.getTimeValues().toString(['minutes', 'seconds']));
+
+            });
+
+            timer.addEventListener('targetAchieved', function (e) {
+                loadHomePageInfo();
+            });
+
+            //timer.start({ countdown: true, precision: 'seconds', startValues: { minutes: initialMin, seconds: initialSec } });
+        }
+
+        window.onload = function () {
+
+            loadHomePageInfo();
+            
+        }
+
+
+    </script>
+</div>

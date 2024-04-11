@@ -7,8 +7,10 @@ This application is designed to streamline the management of practice table rese
 I developed this app to address the challenges I encountered as a Volunteer and Area Coordinator at FLL Explore Tournaments. Traditional methods often led to scheduling conflicts and miscommunication. By digitizing the process, this app ensures a smoother operation, enabling volunteers to manage resources more effectively and enhance the experience for all participants.
 
 ## Features
+- **Easy reservation management:** Streamlines the process of adding, removing, and managing table reservations with a few clicks, enhancing flexibility and control for event coordinators.
 - **Prevents double-booking:** Automatically checks for conflicts to ensure tables are not double-booked.
-- **Auto-fetches availability:** Dynamically retrieves the availability of all tables and time slots during the event setup, incorporating a configurable cooldown period between team reservations.
+- **Auto-fetches availability:** Dynamically retrieves the availability of all tables and time slots during the event setup.
+- **Configurable cooldown for eams** Configurable cooldown period between reservations made by the same team to ensure fair access of all teams to the practice area in high demand.
 - **Advanced search options:** Allows searching for reservations based on team or table.
 - **Real-time updates:** Displays currently active teams and the remaining time on their reserved table.
 - **User-friendly interface:** Developed for ease of use during the high-paced environment of FLL tournaments.

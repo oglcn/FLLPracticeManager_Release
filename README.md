@@ -1,6 +1,28 @@
-# FLLPracticeManager
-This is an application made to assist in FIRST© Lego Leauge tournaments, in the practice table area. The application will help manage the reservations to the practice tables that teams are requesting during the tournament day(s). This application aims to replace the traditional paper-based reservation system which is currently used in most if not all FLL Tournaments. The application aims to bridge the communication gap and help the event volunteers by centralizing the reservation records. Some other features of the app are to avoid double-booking, auto-fetch availability of all tables and time-slots across event when adding new reservation (with configurable cooldown between teams' reservations, search for reservations based on team or table, display currently working teams with remaining time on the table, and so much more. 
+# Practice Table Reservation App for FIRST© Lego League Tournaments
 
-I have developed this app to help solve the issues I have experienced as a Volunteer and Area Coordinator in FIRST© Lego Leauge Explore Tournaments, hosted by Bilim Kahramanları Derneği in Türkiye. Thus, the language of the UI is Turkish. If you would like use this app in any tournament or competiton outside of Turkey, please feel free to fork the repo and contact me for assistance. I will be more than happy to help
+## Overview
+This application is designed to streamline the management of practice table reservations at FIRST© Lego League (FLL) tournaments. It replaces the traditional paper-based system with a digital solution to enhance coordination and communication. This app centralizes reservation records, facilitating the work of event volunteers and improving the overall tournament experience.
 
-This app is developed with .Net 6.0 LTS for the backend and JQuery/Bootstrap for the frontend. I have used MSSQL for database, however any db can be used with minimal modification. 
+## Motivation
+I developed this app to address the challenges I encountered as a Volunteer and Area Coordinator at FLL Explore Tournaments. Traditional methods often led to scheduling conflicts and miscommunication. By digitizing the process, this app ensures a smoother operation, enabling volunteers to manage resources more effectively and enhance the experience for all participants.
+
+## Features
+- **Prevents double-booking:** Automatically checks for conflicts to ensure tables are not double-booked.
+- **Auto-fetches availability:** Dynamically retrieves the availability of all tables and time slots during the event setup, incorporating a configurable cooldown period between team reservations.
+- **Advanced search options:** Allows searching for reservations based on team or table.
+- **Real-time updates:** Displays currently active teams and the remaining time on their reserved table.
+- **User-friendly interface:** Developed for ease of use during the high-paced environment of FLL tournaments.
+
+## Technical Details
+- **Backend:** Developed with .Net 6.0 LTS, ensuring long-term support and stability.
+- **Frontend:** Utilizes JQuery and Bootstrap for a responsive and intuitive user interface.
+- **Database:** Primarily uses MSSQL, though the system is designed to work with any database with minimal modifications.
+
+## Localization
+The application is currently tailored for Turkish users, as it was originally developed for FLL Explore Tournaments hosted by Bilim Kahramanları Derneği in Türkiye. If you are interested in using this app outside of Turkey, please feel free to fork the repository. I am available to provide support and assistance in adapting the app for your local needs.
+
+## Contribution
+Your contributions are welcome! If you have ideas for improvements or have found a bug, please open an issue or submit a pull request.
+
+## Contact
+Feel free to contact me if you need help with setting up or customizing the app for your tournament. I am eager to assist and share insights from my experience as a Volunteer and Area Coordinator in FLL tournaments.
